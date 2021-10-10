@@ -4,7 +4,15 @@ class Graph:
         # test incoherent values
         if nb_nodes < 0 or nb_edges < 0 or len(edges) != nb_edges:
             raise ValueError
+
         self.__nb_nodes = nb_nodes
+        self.__nb_edges = nb_edges
+
+        # start node and end node in each edge should have node id between 0 and nb_nodes - 1
+        for edge in edges:
+            if not (0 <= edge[0] <= self.__nb_nodes - 1 and 0 <= edge[2] <= self.__nb_nodes - 1):
+                raise ValueError
+
         self.__adj_matrix = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
 
     def get_adj_matrix(self):

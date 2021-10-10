@@ -40,3 +40,8 @@ def test_graph_with_54_nodes():
 
     for node_neighbors in graph_test.get_adj_matrix():
         assert len(node_neighbors) == 54
+
+
+def test_edge_with_invalid_values():
+    with pytest.raises(ValueError):
+        Graph(2, 1, [[0, 3, 3]])
