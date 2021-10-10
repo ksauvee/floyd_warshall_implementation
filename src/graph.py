@@ -1,6 +1,18 @@
 class Graph:
-    """Graph represents graph used for floyd-warshall algorithm"""
+    """
+    Graph represents graph used for floyd-warshall algorithm
+    """
     def __init__(self, nb_nodes, nb_edges, edges):
+        """
+        Generate a graph by initialize nb_nodes, nb_edges and adjacency matrix.
+
+        :param nb_nodes: number of graph nodes.
+        :type nb_nodes: int
+        :param nb_edges: number of graph edges.
+        :type nb_edges: int
+        :param edges: graph edges.
+        :type edges: list(list(int))
+        """
         # test incoherent values
         if nb_nodes < 0 or nb_edges < 0 or len(edges) != nb_edges:
             raise ValueError
@@ -20,5 +32,10 @@ class Graph:
             self.__adj_matrix[start_node][end_node] = weight_edge
 
     def get_adj_matrix(self):
+        """
+        Gets graph adjacency matrix.
+
+        :return: the graph adjacency matrix.
+        """
         new_adj_matrix = [node_neighbors.copy() for node_neighbors in self.__adj_matrix]
         return new_adj_matrix
