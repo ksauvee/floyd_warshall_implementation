@@ -13,6 +13,11 @@ def test_negative_number_of_edges():
         Graph(2, -4)
 
 
+def test_edges_list_length_should_equals_nb_edges():
+    with pytest.raises(ValueError):
+        Graph(2, 2, [[0, 0, 0], [0, 9, 0]])
+
+
 def test_graph_without_node():
     graph_test = Graph(0, 0)
     assert len(graph_test.get_adj_matrix()) == 0
