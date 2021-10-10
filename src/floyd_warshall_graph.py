@@ -1,6 +1,4 @@
 class floyd_warshall_graph:
-    nb_nodes = 0
-
     def __init__(self, nb_nodes, ):
         if nb_nodes < 0:
             raise ValueError
