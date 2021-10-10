@@ -1,4 +1,8 @@
+from src.graph import Graph
+
+
 class GraphParser:
+    """GraphParser manages different ways to initialize a graph"""
     @staticmethod
     def translate_file_to_data(filename):
         with open(filename, "r") as reader:
@@ -13,3 +17,9 @@ class GraphParser:
                 edges.append(edge)
 
             return nb_nodes, nb_edges, edges
+
+    @staticmethod
+    def graph_file_parser(filename):
+        nb_nodes, nb_edges, edges = GraphParser.translate_file_to_data(filename)
+        return Graph(nb_nodes)
+
