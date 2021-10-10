@@ -45,3 +45,17 @@ def test_graph_with_54_nodes():
 def test_edge_with_invalid_values():
     with pytest.raises(ValueError):
         Graph(2, 1, [[0, 3, 3]])
+
+
+def test_adj_matrix_correctly_filled():
+    graph_test = Graph(3, 2, [[0, 2, 3], [0, 1, 1]])
+    graph_test_adj_matrix = graph_test.get_adj_matrix()
+
+    for i in range(3):
+        for j in range(3):
+            if i == 0 and j == 1:
+                assert graph_test_adj_matrix[i][j] == 1
+            elif i == 0 and j == 2:
+                assert graph_test_adj_matrix[i][j] == 3
+            else:
+                assert graph_test_adj_matrix[i][j] == 0

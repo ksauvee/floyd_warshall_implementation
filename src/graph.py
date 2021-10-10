@@ -7,13 +7,17 @@ class Graph:
 
         self.__nb_nodes = nb_nodes
         self.__nb_edges = nb_edges
+        self.__adj_matrix = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
 
         # start node and end node in each edge should have node id between 0 and nb_nodes - 1
         for edge in edges:
-            if not (0 <= edge[0] <= self.__nb_nodes - 1 and 0 <= edge[2] <= self.__nb_nodes - 1):
+            if not (0 <= edge[0] <= self.__nb_nodes - 1 and 0 <= edge[1] <= self.__nb_nodes - 1):
                 raise ValueError
 
-        self.__adj_matrix = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+            start_node = edge[0]
+            end_node = edge[1]
+            weight_edge = edge[2]
+            self.__adj_matrix[start_node][end_node] = weight_edge
 
     def get_adj_matrix(self):
         new_adj_matrix = [node_neighbors.copy() for node_neighbors in self.__adj_matrix]
