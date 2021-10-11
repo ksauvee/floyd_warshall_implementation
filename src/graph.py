@@ -61,3 +61,27 @@ class Graph:
         Display a matrix corresponding to the given graph
         :return: none ?
         """
+
+        adj_matrix = self.get_adj_matrix()
+        print("    ", end ='')
+        if (len(self.get_adj_matrix()) >= 10):
+            string = ' '
+        for k in range (len(self.get_adj_matrix())):
+            string += str(k)
+            if (len(self.get_adj_matrix()) >= 10 and k < 10):
+                string+=' '
+            print(string, end=' ')
+            string = ''
+        print("\n   "+"---"*len(self.get_adj_matrix())+'-', end='')
+        print()
+        for i in range (len(self.get_adj_matrix())):
+            string2 = str(i)
+            if (len(self.get_adj_matrix()) >= 10 and i<10):
+                string2+=' '
+            string2+=' | '
+            print(string2, end = '')
+            for j in range(len(self.get_adj_matrix()[i])):
+                print(str(self.get_adj_matrix()[i][j]), end=' ')
+                if (len(self.get_adj_matrix()) >= 10):
+                    print(' ', end='')
+            print()
