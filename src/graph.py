@@ -57,6 +57,7 @@ class Graph:
 
         :return: the graph adjacency matrix.
         """
+        # we use copy method in order to respect encapsulation.
         new_adj_matrix = [node_neighbors.copy() for node_neighbors in self.__adj_matrix]
         return new_adj_matrix
 
@@ -65,28 +66,33 @@ class Graph:
         Apply floyd-warshall algorithm on graph.
 
         :return 
-            - dist : shortest distance between each node.
-            - prev : node's predecessor in the path with the shortest distance.
+            - dist : dist is a matrix n*n where dist[i][j] represents the shortest distance between i and j.
+            - prev : prev is a matrix n*n where prev[i][j] represents the predecessor of j in this shortest path.
         """
         if self.__nb_edges <= 0:
             raise ValueError
 
-        dist, pred = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [
+        dist, prev = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [
             [0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
 
+        # initialization : in this step we set dist and prev by visiting direct paths given by adjacency matrix.
         for i in range(self.__nb_nodes):
             for j in range(self.__nb_nodes):
                 dist[i][j] = self.__adj_matrix[i][j]
-                pred[i][j] = i
+                prev[i][j] = i
 
         for i in range(self.__nb_nodes):
+            # we set dist[i][i] to 0 because there isn't distance between the node and itself.
             dist[i][i] = 0
 
+        # iterations : in this step we set dist and prev by visiting paths passing through node k.
         for k in range(0, self.__nb_nodes):
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
                     if dist[i][k] + dist[k][j] < dist[i][j]:
+                        # we find a shorter distance between i and j so we actualize it.
                         dist[i][j] = dist[i][k] + dist[k][j]
-                        pred[i][j] = pred[k][j]
+                        # we also change the predecessor.
+                        prev[i][j] = prev[k][j]
 
-        return dist, pred
+        return dist, prev
