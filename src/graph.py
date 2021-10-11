@@ -55,3 +55,9 @@ class Graph:
         """
         new_adj_matrix = [node_neighbors.copy() for node_neighbors in self.__adj_matrix]
         return new_adj_matrix
+
+    def display_graph(self):
+        """
+        Display a matrix corresponding to the given graph
+        :return: none ?
+        """
