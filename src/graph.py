@@ -76,6 +76,9 @@ class Graph:
                 dist[i][j] = self.__adj_matrix[i][j]
                 pred[i][j] = i
 
+        for i in range(self.__nb_nodes):
+            dist[i][i] = 0
+
         for k in range(0, self.__nb_nodes):
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
