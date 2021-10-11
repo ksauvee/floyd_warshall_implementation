@@ -1,4 +1,5 @@
 import pytest
+from math import inf
 
 from src.graph import Graph
 
@@ -58,4 +59,4 @@ def test_adj_matrix_correctly_filled():
             elif i == 0 and j == 2:
                 assert graph_test_adj_matrix[i][j] == 3
             else:
-                assert graph_test_adj_matrix[i][j] == 0
+                assert graph_test_adj_matrix[i][j] == inf

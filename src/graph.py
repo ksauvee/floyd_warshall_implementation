@@ -1,3 +1,5 @@
+from math import inf
+
 class Graph:
     """
     Graph represents graph used for floyd-warshall algorithm
@@ -19,7 +21,7 @@ class Graph:
 
         self.__nb_nodes = nb_nodes
         self.__nb_edges = nb_edges
-        self.__adj_matrix = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+        self.__adj_matrix = [[inf for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
 
         # start node and end node in each edge should have node id between 0 and nb_nodes - 1
         for edge in edges:
@@ -55,3 +57,30 @@ class Graph:
         """
         new_adj_matrix = [node_neighbors.copy() for node_neighbors in self.__adj_matrix]
         return new_adj_matrix
+
+    def floyd_warshall(self):
+        """
+        Give 
+
+        :return 
+            - cost of the way from node i to j
+            - 
+        """
+        if(self.__nb_edges <= 0):
+            raise ValueError
+
+        dist, pred = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+
+        for i in range(0, self.__nb_nodes):
+            for j in range(0, self.__nb_nodes):
+                dist[i][j] = self.__adj_matrix[i][j]
+                pred[i][j] = i
+
+        for k in range(0, self.__nb_nodes):
+            for i in range(0, self.__nb_nodes):
+                for j in range(0, self.__nb_nodes):
+                    if(dist[i][k] + dist[k][j] < dist[i][j]):
+                        dist[i][j] = dist[i][k] + dist[k][j] 
+                        pred[i][j] = pred[k][j]
+
+        return dist, pred
