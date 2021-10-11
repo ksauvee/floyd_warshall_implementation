@@ -31,6 +31,22 @@ class Graph:
             weight_edge = edge[2]
             self.__adj_matrix[start_node][end_node] = weight_edge
 
+    def get_nb_nodes(self):
+        """
+        Gets number of graph nodes.
+
+        :return: the number of graph nodes.
+        """
+        return self.__nb_nodes
+
+    def get_nb_edges(self):
+        """
+        Gets number of graph edges.
+
+        :return: the number of graph edges.
+        """
+        return self.__nb_edges
+
     def get_adj_matrix(self):
         """
         Gets graph adjacency matrix.
