@@ -1,9 +1,11 @@
 from math import inf
 
+
 class Graph:
     """
     Graph represents graph used for floyd-warshall algorithm
     """
+
     def __init__(self, nb_nodes, nb_edges, edges):
         """
         Generate a graph by initialize nb_nodes, nb_edges and adjacency matrix.
@@ -60,19 +62,20 @@ class Graph:
 
     def floyd_warshall(self):
         """
-        Give 
+        Apply floyd-warshall algorithm on graph.
 
         :return 
-            - cost of the way from node i to j
-            - 
+            - dist : shortest distance between each node.
+            - prev : node's predecessor in the path with the shortest distance.
         """
-        if(self.__nb_edges <= 0):
+        if self.__nb_edges <= 0:
             raise ValueError
 
-        dist, pred = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+        dist, pred = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [
+            [0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
 
-        for i in range(0, self.__nb_nodes):
-            for j in range(0, self.__nb_nodes):
+        for i in range(self.__nb_nodes):
+            for j in range(self.__nb_nodes):
                 dist[i][j] = self.__adj_matrix[i][j]
                 pred[i][j] = i
 
@@ -82,8 +85,8 @@ class Graph:
         for k in range(0, self.__nb_nodes):
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
-                    if(dist[i][k] + dist[k][j] < dist[i][j]):
-                        dist[i][j] = dist[i][k] + dist[k][j] 
+                    if dist[i][k] + dist[k][j] < dist[i][j]:
+                        dist[i][j] = dist[i][k] + dist[k][j]
                         pred[i][j] = pred[k][j]
 
         return dist, pred
