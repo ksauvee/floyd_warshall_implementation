@@ -83,7 +83,7 @@ class Graph:
 
         for i in range(self.__nb_nodes):
             # we set dist[i][i] to 0 because there isn't distance between the node and itself.
-            if(dist[i][i] > 0):
+            if dist[i][i] > 0:
                 dist[i][i] = 0
 
         # iterations : in this step we set dist and prev by visiting paths passing through node k.
@@ -100,12 +100,14 @@ class Graph:
 
     def __detect_negative_cycle(self, dist, prev):
         have_negative_cycle = False
-        # iteration : in this step we look if the path could be shorter than in the floyd warshall algorith. We visit every path passing through node k
+        # iteration : in this step we look if the path could be shorter than in the floyd warshall algorithm. We visit
+        # every path passing through node k
         for k in range(0, self.__nb_nodes):
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
                     if dist[i][k] + dist[k][j] < dist[i][j]:
-                        # we find a shorter distance between i and j so we actualize it and put -inf to represent a negative cycle.
+                        # we find a shorter distance between i and j so we actualize it and put -inf to represent a
+                        # negative cycle.
                         dist[i][j] = -inf
                         # he got no predecessor indeed he is in a negative cycle.
                         prev[i][j] = -1
