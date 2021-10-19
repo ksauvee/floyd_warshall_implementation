@@ -127,5 +127,5 @@ class Graph:
         :type graph_previous_matrix: list(list(int))
         :return: the path between start node and end node.
         """
-        if not 0 <= start_node_id <= self.__nb_nodes - 1:
+        if not (0 <= start_node_id <= self.__nb_nodes - 1 and 0 <= end_node_id <= self.__nb_nodes - 1):
             raise ValueError

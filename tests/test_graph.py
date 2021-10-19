@@ -68,3 +68,11 @@ def test_get_path_incorrect_start_id():
 
     with pytest.raises(ValueError):
         graph_test.get_path(-2, 1, prev)
+
+
+def test_get_path_incorrect_end_id():
+    graph_test = Graph(2, 1, [[0, 1, 1]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+
+    with pytest.raises(ValueError):
+        graph_test.get_path(0, 8, prev)
