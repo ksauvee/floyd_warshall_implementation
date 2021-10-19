@@ -88,3 +88,9 @@ def test_get_path_direct_path():
     graph_test = Graph(2, 1, [[0, 1, -4]])
     dist, prev, have_negative_cycle = graph_test.floyd_warshall()
     assert graph_test.get_path(0, 1, prev, dist) == "0->1"
+
+
+def test_get_path_more_complex():
+    graph_test = Graph(4, 7, [[0, 1, 2], [0, 3, 6], [1, 2, -2], [2, 3, 5], [2, 1, 5], [3, 0, -4], [3, 1, -1]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+    assert graph_test.get_path(3, 1, prev, dist) == "3->0->1"
