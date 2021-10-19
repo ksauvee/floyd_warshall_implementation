@@ -60,3 +60,11 @@ def test_adj_matrix_correctly_filled():
                 assert graph_test_adj_matrix[i][j] == 3
             else:
                 assert graph_test_adj_matrix[i][j] == inf
+
+
+def test_get_path_incorrect_start_id():
+    graph_test = Graph(2, 1, [[0, 1, 1]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+
+    with pytest.raises(ValueError):
+        graph_test.get_path(-2, 1, prev)
