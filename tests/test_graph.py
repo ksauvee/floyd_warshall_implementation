@@ -82,3 +82,9 @@ def test_get_path_when_no_path():
     graph_test = Graph(3, 1, [[0, 1, 1]])
     dist, prev, have_negative_cycle = graph_test.floyd_warshall()
     assert graph_test.get_path(0, 2, prev, dist) == ""
+
+
+def test_get_path_direct_path():
+    graph_test = Graph(2, 1, [[0, 1, -4]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+    assert graph_test.get_path(0, 1, prev, dist) == "0->1"
