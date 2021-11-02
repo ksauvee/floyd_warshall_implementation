@@ -114,3 +114,31 @@ class Graph:
                         have_negative_cycle = True
 
         return dist, prev, have_negative_cycle
+
+    def get_path(self, start_node_id, end_node_id, graph_previous_matrix, graph_dist_matrix):
+        """
+        Get shortest path between start node and end node.
+
+        :param start_node_id: the identifier of the starting node of the path.
+        :type start_node_id: int
+        :param end_node_id: the identifier of the end node of the path.
+        :type end_node_id: int
+        :param graph_previous_matrix: the graph previous matrix returned by floyd-warshall algorithm.
+        :type graph_previous_matrix: list(list(int))
+        :param graph_dist_matrix: the graph dist matrix returned by floyd-warshall algorithm.
+        :type graph_dist_matrix: list(list(int))
+        :return: the path between start node and end node.
+        """
+        if not (0 <= start_node_id <= self.__nb_nodes - 1 and 0 <= end_node_id <= self.__nb_nodes - 1):
+            raise ValueError
+
+        # if distance between nodes is infinity (no link between them) => no path
+        if graph_dist_matrix[start_node_id][end_node_id] == inf:
+            return ""
+
+        path = str(end_node_id)
+        while end_node_id != start_node_id:
+            end_node_id = graph_previous_matrix[start_node_id][end_node_id]
+            path = str(end_node_id) + "->" + path
+
+        return path
