@@ -142,3 +142,14 @@ class Graph:
             path = str(end_node_id) + "->" + path
 
         return path
+
+    def display_paths(self):
+        """
+        Display the shortest path beetween every pair of node
+        :return: none
+        """
+        for i in range (0, self.__nb_nodes):
+            for j in range (0, self.__nb_nodes):
+                if i != j:
+                    dist, prev, have_negative_cycle = self.floyd_warshall()
+                    print("Chemin le plus court entre "+str(i)+" et "+str(j)+" : "+str(self.get_path(i, j, prev, dist)))
