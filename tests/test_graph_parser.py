@@ -1,25 +1,24 @@
+import pytest
+
 from src.graph_parser import GraphParser
 
 
 def test_translate_file_to_data_0_node():
-    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("../resources"
-                                                                                                    "/demo_graph_0.txt")
+    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("resources/demo_graph_0.txt")
     assert graph_test_nb_nodes == 0
     assert graph_test_nb_edges == 0
     assert len(graph_test_edges) == 0
 
 
 def test_translate_file_to_data_1_node():
-    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("../resources"
-                                                                                                    "/demo_graph_1.txt")
+    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("resources/demo_graph_1.txt")
     assert graph_test_nb_nodes == 1
     assert graph_test_nb_edges == 0
     assert len(graph_test_edges) == 0
 
 
 def test_translate_file_to_data_2_nodes():
-    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("../resources"
-                                                                                                    "/demo_graph_2.txt")
+    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("resources/demo_graph_2.txt")
     assert graph_test_nb_nodes == 2
     assert graph_test_nb_edges == 1
     assert len(graph_test_edges) == 1
@@ -27,8 +26,7 @@ def test_translate_file_to_data_2_nodes():
 
 
 def test_translate_file_to_data_some_graph():
-    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("../resources"
-                                                                                                    "/demo_graph_3.txt")
+    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = GraphParser.translate_file_to_data("resources/demo_graph_3.txt")
     assert graph_test_nb_nodes == 4
     assert graph_test_nb_edges == 5
     assert len(graph_test_edges) == 5

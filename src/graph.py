@@ -1,7 +1,11 @@
+from math import inf
+
+
 class Graph:
     """
     Graph represents graph used for floyd-warshall algorithm
     """
+
     def __init__(self, nb_nodes, nb_edges, edges):
         """
         Generate a graph by initialize nb_nodes, nb_edges and adjacency matrix.
@@ -19,7 +23,7 @@ class Graph:
 
         self.__nb_nodes = nb_nodes
         self.__nb_edges = nb_edges
-        self.__adj_matrix = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+        self.__adj_matrix = [[inf for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
 
         # start node and end node in each edge should have node id between 0 and nb_nodes - 1
         for edge in edges:
@@ -53,5 +57,99 @@ class Graph:
 
         :return: the graph adjacency matrix.
         """
+        # we use copy method in order to respect encapsulation.
         new_adj_matrix = [node_neighbors.copy() for node_neighbors in self.__adj_matrix]
         return new_adj_matrix
+
+    def floyd_warshall(self):
+        """
+        Apply floyd-warshall algorithm on graph.
+
+        :return 
+            - dist : dist is a matrix n*n where dist[i][j] represents the shortest distance between i and j.
+            - prev : prev is a matrix n*n where prev[i][j] represents the predecessor of j in this shortest path.
+        """
+        if self.__nb_edges <= 0:
+            raise ValueError
+
+        dist, prev = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [
+            [0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+
+        # initialization : in this step we set dist and prev by visiting direct paths given by adjacency matrix.
+        for i in range(self.__nb_nodes):
+            for j in range(self.__nb_nodes):
+                dist[i][j] = self.__adj_matrix[i][j]
+                prev[i][j] = i
+
+        for i in range(self.__nb_nodes):
+            # we set dist[i][i] to 0 because there isn't distance between the node and itself.
+            if dist[i][i] > 0:
+                dist[i][i] = 0
+
+        # iterations : in this step we set dist and prev by visiting paths passing through node k.
+        for k in range(0, self.__nb_nodes):
+            for i in range(0, self.__nb_nodes):
+                for j in range(0, self.__nb_nodes):
+                    if dist[i][k] + dist[k][j] < dist[i][j]:
+                        # we find a shorter distance between i and j so we actualize it.
+                        dist[i][j] = dist[i][k] + dist[k][j]
+                        # we also change the predecessor.
+                        prev[i][j] = prev[k][j]
+        dist, prev, have_negative_cycle = self.__detect_negative_cycle(dist, prev)
+        return dist, prev, have_negative_cycle
+
+    def __detect_negative_cycle(self, dist, prev):
+        have_negative_cycle = False
+        # iteration : in this step we look if the path could be shorter than in the floyd warshall algorithm. We visit
+        # every path passing through node k
+        for k in range(0, self.__nb_nodes):
+            for i in range(0, self.__nb_nodes):
+                for j in range(0, self.__nb_nodes):
+                    if dist[i][k] + dist[k][j] < dist[i][j]:
+                        # we find a shorter distance between i and j so we actualize it and put -inf to represent a
+                        # negative cycle.
+                        dist[i][j] = -inf
+                        # he got no predecessor indeed he is in a negative cycle.
+                        prev[i][j] = -1
+                        have_negative_cycle = True
+
+        return dist, prev, have_negative_cycle
+
+    def get_path(self, start_node_id, end_node_id, graph_previous_matrix, graph_dist_matrix):
+        """
+        Get shortest path between start node and end node.
+
+        :param start_node_id: the identifier of the starting node of the path.
+        :type start_node_id: int
+        :param end_node_id: the identifier of the end node of the path.
+        :type end_node_id: int
+        :param graph_previous_matrix: the graph previous matrix returned by floyd-warshall algorithm.
+        :type graph_previous_matrix: list(list(int))
+        :param graph_dist_matrix: the graph dist matrix returned by floyd-warshall algorithm.
+        :type graph_dist_matrix: list(list(int))
+        :return: the path between start node and end node.
+        """
+        if not (0 <= start_node_id <= self.__nb_nodes - 1 and 0 <= end_node_id <= self.__nb_nodes - 1):
+            raise ValueError
+
+        # if distance between nodes is infinity (no link between them) => no path
+        if graph_dist_matrix[start_node_id][end_node_id] == inf:
+            return ""
+
+        path = str(end_node_id)
+        while end_node_id != start_node_id:
+            end_node_id = graph_previous_matrix[start_node_id][end_node_id]
+            path = str(end_node_id) + "->" + path
+
+        return path
+
+    def display_paths(self):
+        """
+        Display the shortest path beetween every pair of node
+        :return: none
+        """
+        dist, prev, have_negative_cycle = self.floyd_warshall()
+        for i in range (0, self.__nb_nodes):
+            for j in range (0, self.__nb_nodes):
+                if i != j:
+                    print("Chemin le plus court entre "+str(i)+" et "+str(j)+" : "+str(self.get_path(i, j, prev, dist)))
