@@ -16,7 +16,7 @@ if __name__ == "__main__":
         print("\nApplication de l'algorithme Floyd-Warshall...")
         dist, prev, have_negative_cycle = graph_chosen.floyd_warshall()
 
-        print("\nDétection de circuits absorbants...")
+        print("\nRecherche de circuits absorbants...")
         if have_negative_cycle:
             print("Il existe des circuits absorbants !")
         else:
