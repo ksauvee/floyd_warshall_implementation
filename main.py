@@ -11,10 +11,16 @@ if __name__ == "__main__":
         graph_filename_chosen = GraphSelector.graph_selector()
         print("\nCréation du graphe...")
         graph_chosen = GraphParser.graph_file_parser(graph_filename_chosen)
+
         print("\nAffichage du graphe...")
         # Display graph here
         print("\nApplication de l'algorithme Floyd-Warshall...")
-        dist, prev, have_negative_cycle = graph_chosen.floyd_warshall()
+        try:
+            dist, prev, have_negative_cycle = graph_chosen.floyd_warshall()
+        except ValueError:
+            print("Erreur : Impossible d'appliquer l'algorithme de Floyd-Warshall sur ce graphe.\n"
+                  "Vérifiez que le nombre de liens du graphe est >= 0.")
+            continue
 
         print("\nRecherche de circuits absorbants...")
         if have_negative_cycle:
