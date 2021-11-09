@@ -19,15 +19,6 @@ def test_translate_file_to_data_1_node():
     assert len(graph_test_edges) == 0
 
 
-def test_translate_file_to_data_2_nodes():
-    graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = \
-        GraphParser.translate_file_to_data("resources/test_graphs/G-3.txt")
-    assert graph_test_nb_nodes == 2
-    assert graph_test_nb_edges == 1
-    assert len(graph_test_edges) == 1
-    assert graph_test_edges == [[0, 1, 1]]
-
-
 def test_translate_file_to_data_some_graph():
     graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = \
         GraphParser.translate_file_to_data("resources/test_graphs/G-4.txt")
