@@ -134,7 +134,7 @@ class Graph:
 
         # if distance between nodes is infinity (no link between them) => no path
         if graph_dist_matrix[start_node_id][end_node_id] == inf:
-            return ""
+            return "Pas de chemin."
 
         path = str(end_node_id)
         while end_node_id != start_node_id:
