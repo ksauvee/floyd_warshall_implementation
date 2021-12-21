@@ -5,12 +5,13 @@ if __name__ == "__main__":
     print("Bienvenue !")
 
     print("Voulez-vous sauvegarder les traces d'exécution ?\n- 1 : Oui\n- 2 : Non")
-    choice = int(input())
+    choice = input()
 
-    while not 1 <= choice <= 2:
+    while not (choice.isnumeric() and 1 <= int(choice) <= 2):
         print("Voulez-vous sauvegarder les traces d'exécution ? (Veuillez entrer 1 ou 2)\n- 1 : Oui\n- 2 : Non")
-        choice = int(input())
+        choice = input()
 
+    choice = int(choice)
     store_traces = False
     if choice == 1:
         store_traces = True
@@ -55,10 +56,12 @@ if __name__ == "__main__":
                     traces_file.write(paths)
 
         print("\nSouhaitez-vous tester un autre graphe ?\n- 1 : Oui\n- 2 : Non")
-        isLoopContinuing = int(input())
+        isLoopContinuing = input()
 
-        while not 1 <= isLoopContinuing <= 2:
+        while not (isLoopContinuing.isnumeric() and 1 <= int(isLoopContinuing) <= 2):
             print("\nSouhaitez-vous tester un autre graphe ? (Veuillez entrer 1 ou 2)\n- 1 : Oui\n- 2 : Non")
-            isLoopContinuing = int(input())
+            isLoopContinuing = input()
+
+        isLoopContinuing = int(isLoopContinuing)
 
     print("\nAu revoir !")
