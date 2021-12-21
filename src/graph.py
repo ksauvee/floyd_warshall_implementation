@@ -158,3 +158,39 @@ class Graph:
                         self.get_path(i, j, prev, dist)) + "\n"
 
         return paths
+
+    def display(self):
+        """
+        Display graph adjacency matrix.
+        """
+        # max_number_length is the length of the largest number (including - for negative numbers in number length)
+        max_number_length = max(max(x) for x in
+                                [[len(number) for number in list(map(str, row))] for row in self.__adj_matrix])
+        max_number_length = max(max_number_length, len(str(self.__nb_nodes))-1)
+
+        # first we print the list of nodes
+        print("    ", end="")
+        for node_id in range(self.__nb_nodes):
+            # we print " " * (max_number_length - len(str(node_id)))
+            # in order to align display according to the largest number
+            print(" " * (max_number_length - len(str(node_id))), end="")
+            print(" {}".format(node_id), end="")
+        print()
+
+        # then we print the dashes
+        print("    ", end="")
+        for node_id in range(self.__nb_nodes):
+            print("-" * (max_number_length + 1), end="")
+        print()
+
+        # finally, we print the adj matrix rows
+        for starting_node in range(self.__nb_nodes):
+            # we print the starting node
+            print(" {} |".format(starting_node), end="")
+            for ending_node in range(self.__nb_nodes):
+                # here we print the weighs of the links between the starting node and the ending node
+                # we print " " * (max_number_length - len(str(self.__adj_matrix[row][column])))
+                # in order to align display according to the largest number
+                print(" " * (max_number_length - len(str(self.__adj_matrix[starting_node][ending_node]))), end="")
+                print(" {}".format(self.__adj_matrix[starting_node][ending_node]), end="")
+            print()
