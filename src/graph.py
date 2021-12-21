@@ -88,6 +88,12 @@ class Graph:
 
         # iterations : in this step we set dist and prev by visiting paths passing through node k.
         for k in range(0, self.__nb_nodes):
+            print("Itération n°{}:".format(k + 1))
+            print("L :")
+            self.display_matrix(dist)
+            print("\n P :")
+            self.display_matrix(prev)
+            print("\n")
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
                     if dist[i][k] + dist[k][j] < dist[i][j]:
@@ -159,13 +165,15 @@ class Graph:
 
         return paths
 
-    def display(self):
+    def display_matrix(self, graph_matrix):
         """
-        Display graph adjacency matrix.
+        Display graph matrix either dist, prev or adjacency matrix.
+        :param graph_matrix: the matrix to print.
+        :type graph_matrix: list(list(int))
         """
         # max_number_length is the length of the largest number (including - for negative numbers in number length)
         max_number_length = max(max(x) for x in
-                                [[len(number) for number in list(map(str, row))] for row in self.__adj_matrix])
+                                [[len(number) for number in list(map(str, row))] for row in graph_matrix])
         max_number_length = max(max_number_length, len(str(self.__nb_nodes))-1)
 
         # first we print the list of nodes
@@ -191,6 +199,6 @@ class Graph:
                 # here we print the weighs of the links between the starting node and the ending node
                 # we print " " * (max_number_length - len(str(self.__adj_matrix[row][column])))
                 # in order to align display according to the largest number
-                print(" " * (max_number_length - len(str(self.__adj_matrix[starting_node][ending_node]))), end="")
-                print(" {}".format(self.__adj_matrix[starting_node][ending_node]), end="")
+                print(" " * (max_number_length - len(str(graph_matrix[starting_node][ending_node]))), end="")
+                print(" {}".format(graph_matrix[starting_node][ending_node]), end="")
             print()

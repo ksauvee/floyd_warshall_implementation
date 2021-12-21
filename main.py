@@ -23,8 +23,8 @@ if __name__ == "__main__":
         print("\nCréation du graphe...")
         graph_chosen = GraphParser.graph_file_parser(graph_filename_chosen)
 
-        print("\nAffichage du graphe : ")
-        graph_chosen.display()
+        print("\nAffichage du graphe : \n")
+        graph_chosen.display_matrix(graph_chosen.get_adj_matrix())
 
         print("\nApplication de l'algorithme Floyd-Warshall...")
         try:
