@@ -18,7 +18,7 @@ if __name__ == "__main__":
         print("\nCréation du graphe...")
         graph_chosen = GraphParser.graph_file_parser(graph_filename_chosen)
 
-        print("\nAffichage du graphe...")
+        print("\nAffichage du graphe : ")
         # Display graph here
         print("\nApplication de l'algorithme Floyd-Warshall...")
         try:
@@ -35,15 +35,17 @@ if __name__ == "__main__":
                 with open(execution_traces_filepath, "w") as traces_file:
                     traces_file.write("Il existe des circuits absorbants !")
         else:
-            print("Il n'existe pas de circuits absorbants !")
-            print("\nAffichage des chemins les plus courts entre chaque paire de sommets...")
+            print("Il n'existe pas de circuits absorbants !\n")
+            print("Affichage des chemins les plus courts entre chaque paire de sommets : ")
+            print("Format: sommet_initial->sommet_2->...->sommet_terminal (longueur du chemin)\n")
             paths = graph_chosen.get_paths(prev, dist)
             print(paths)
 
             if store_traces:
                 with open(execution_traces_filepath, "w") as traces_file:
                     traces_file.write("Il n'existe pas de circuits absorbants !\n\n")
-                    traces_file.write("Affichage des chemins les plus courts entre chaque paire de sommets...\n")
+                    traces_file.write("Affichage des chemins les plus courts entre chaque paire de sommets : \n")
+                    traces_file.write("Format: sommet_initial->sommet_2->...->sommet_terminal (longueur du chemin)\n\n")
                     traces_file.write(paths)
 
         print("\nSouhaitez-vous tester un autre graphe ?\n- 1 : Oui\n- 2 : Non")

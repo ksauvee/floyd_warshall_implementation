@@ -136,12 +136,14 @@ class Graph:
         if graph_dist_matrix[start_node_id][end_node_id] == inf:
             return "Pas de chemin."
 
+        path_dist = graph_dist_matrix[start_node_id][end_node_id]
+
         path = str(end_node_id)
         while end_node_id != start_node_id:
             end_node_id = graph_previous_matrix[start_node_id][end_node_id]
             path = str(end_node_id) + "->" + path
 
-        return path
+        return path + " (" + str(path_dist) + ")"
 
     def get_paths(self, prev, dist):
         """
