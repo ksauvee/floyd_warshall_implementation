@@ -24,7 +24,8 @@ if __name__ == "__main__":
         graph_chosen = GraphParser.graph_file_parser(graph_filename_chosen)
 
         print("\nAffichage du graphe : ")
-        # Display graph here
+        graph_chosen.display()
+
         print("\nApplication de l'algorithme Floyd-Warshall...")
         try:
             dist, prev, have_negative_cycle = graph_chosen.floyd_warshall()
