@@ -101,6 +101,13 @@ class Graph:
                         dist[i][j] = dist[i][k] + dist[k][j]
                         # we also change the predecessor.
                         prev[i][j] = prev[k][j]
+
+        print("Itération n°{}:".format(self.__nb_nodes + 1))
+        print("L :")
+        self.display_matrix(dist)
+        print("\n P :")
+        self.display_matrix(prev)
+        print("\n")
         dist, prev, have_negative_cycle = self.__detect_negative_cycle(dist, prev)
         return dist, prev, have_negative_cycle
 

@@ -29,6 +29,7 @@ if __name__ == "__main__":
 
         print("\nApplication de l'algorithme Floyd-Warshall...")
         try:
+            print("Affichage des matrices L et P à chaque itération :")
             dist, prev, have_negative_cycle = graph_chosen.floyd_warshall()
         except ValueError:
             print("Erreur : Impossible d'appliquer l'algorithme de Floyd-Warshall sur ce graphe.\n"
