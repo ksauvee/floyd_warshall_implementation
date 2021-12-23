@@ -163,6 +163,9 @@ class Graph:
         Get the shortest path beetween every pair of node
         :return: paths list
         """
+        if prev is None or dist is None:
+            raise ValueError
+
         paths = ""
         for i in range(0, self.__nb_nodes):
             for j in range(0, self.__nb_nodes):
@@ -181,7 +184,7 @@ class Graph:
         # max_number_length is the length of the largest number (including - for negative numbers in number length)
         max_number_length = max(max(x) for x in
                                 [[len(number) for number in list(map(str, row))] for row in graph_matrix])
-        max_number_length = max(max_number_length, len(str(self.__nb_nodes))-1)
+        max_number_length = max(max_number_length, len(str(self.__nb_nodes)) - 1)
 
         # first we print the list of nodes
         print("    ", end="")
