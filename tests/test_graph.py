@@ -94,3 +94,29 @@ def test_get_path_more_complex():
     graph_test = Graph(4, 7, [[0, 1, 2], [0, 3, 6], [1, 2, -2], [2, 3, 5], [2, 1, 5], [3, 0, -4], [3, 1, -1]])
     dist, prev, have_negative_cycle = graph_test.floyd_warshall()
     assert graph_test.get_path(3, 1, prev, dist) == "3->0->1 (-2)"
+
+
+def test_get_paths_should_throw_error_when_prev_is_null():
+    graph_test = Graph(2, 1, [[0, 1, 1]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+    with pytest.raises(ValueError):
+        graph_test.get_paths(None, dist)
+
+
+def test_get_paths_should_throw_error_when_dist_is_null():
+    graph_test = Graph(2, 1, [[0, 1, 1]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+    with pytest.raises(ValueError):
+        graph_test.get_paths(prev, None)
+
+
+def test_get_paths_graph():
+    graph_test = Graph(3, 2, [[0, 1, 1], [1, 2, 3]])
+    dist, prev, have_negative_cycle = graph_test.floyd_warshall()
+    paths = graph_test.get_paths(prev, dist)
+    assert paths == "Chemin le plus court entre 0 et 1 : 0->1 (1)\n" \
+                    "Chemin le plus court entre 0 et 2 : 0->1->2 (4)\n" \
+                    "Chemin le plus court entre 1 et 0 : Pas de chemin.\n" \
+                    "Chemin le plus court entre 1 et 2 : 1->2 (3)\n" \
+                    "Chemin le plus court entre 2 et 0 : Pas de chemin.\n" \
+                    "Chemin le plus court entre 2 et 1 : Pas de chemin.\n"
