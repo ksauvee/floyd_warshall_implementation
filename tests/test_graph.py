@@ -58,6 +58,8 @@ def test_adj_matrix_correctly_filled():
                 assert graph_test_adj_matrix[i][j] == 1
             elif i == 0 and j == 2:
                 assert graph_test_adj_matrix[i][j] == 3
+            elif i == j:
+                assert graph_test_adj_matrix[i][j] == 0
             else:
                 assert graph_test_adj_matrix[i][j] == inf
 

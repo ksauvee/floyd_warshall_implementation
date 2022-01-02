@@ -23,7 +23,7 @@ class Graph:
 
         self.__nb_nodes = nb_nodes
         self.__nb_edges = nb_edges
-        self.__adj_matrix = [[inf for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
+        self.__adj_matrix = [[0 if i == j else inf for i in range(self.__nb_nodes)] for j in range(self.__nb_nodes)]
 
         # start node and end node in each edge should have node id between 0 and nb_nodes - 1
         for edge in edges:
@@ -80,11 +80,6 @@ class Graph:
             for j in range(self.__nb_nodes):
                 dist[i][j] = self.__adj_matrix[i][j]
                 prev[i][j] = i
-
-        for i in range(self.__nb_nodes):
-            # we set dist[i][i] to 0 because there isn't distance between the node and itself.
-            if dist[i][i] > 0:
-                dist[i][i] = 0
 
         # iterations : in this step we set dist and prev by visiting paths passing through node k.
         for k in range(0, self.__nb_nodes):
