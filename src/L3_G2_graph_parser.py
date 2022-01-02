@@ -1,4 +1,4 @@
-from src.graph import Graph
+from src.L3_G2_graph import Graph
 
 
 class GraphParser:

@@ -1,6 +1,4 @@
-import pytest
-
-from src.graph_parser import GraphParser
+from src.L3_G2_graph_parser import GraphParser
 
 
 def test_translate_file_to_data_0_node():
