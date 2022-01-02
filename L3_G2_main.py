@@ -24,37 +24,31 @@ if __name__ == "__main__":
         print("\nCréation du graphe...")
         graph_chosen = GraphParser.graph_file_parser(graph_filename_chosen)
 
-        print("\nAffichage du graphe : \n")
-        graph_chosen.display_matrix(graph_chosen.get_adj_matrix())
-
-        print("\nApplication de l'algorithme Floyd-Warshall...")
+        logs = "Affichage du graphe : \n"
+        logs += "\n" + graph_chosen.display_matrix(graph_chosen.get_adj_matrix())
+        logs += "\nApplication de l'algorithme Floyd-Warshall...\n"
         try:
             print("Affichage des matrices L et P à chaque itération :")
-            dist, prev, have_negative_cycle = graph_chosen.floyd_warshall()
+            dist, prev, have_negative_cycle, floyd_warshall_logs = graph_chosen.floyd_warshall()
+            logs += floyd_warshall_logs
         except ValueError:
             print("Erreur : Impossible d'appliquer l'algorithme de Floyd-Warshall sur ce graphe.\n"
                   "Vérifiez que le nombre de liens du graphe est >= 0.")
             continue
-        print("\nRecherche de circuits absorbants...")
+        logs += "\nRecherche de circuits absorbants...\n"
         if have_negative_cycle:
-            print("Il existe des circuits absorbants !")
-
-            if store_traces:
-                with open(execution_traces_filepath, "w") as traces_file:
-                    traces_file.write("Il existe des circuits absorbants !")
+            logs += "Il existe des circuits absorbants !\n"
         else:
-            print("Il n'existe pas de circuits absorbants !\n")
-            print("Affichage des chemins les plus courts entre chaque paire de sommets : ")
-            print("Format: sommet_initial->sommet_2->...->sommet_terminal (longueur du chemin)\n")
-            paths = graph_chosen.get_paths(prev, dist)
-            print(paths)
+            logs += "Il n'existe pas de circuits absorbants !\n\n" \
+                    + "Affichage des chemins les plus courts entre chaque paire de sommets : \n" \
+                    + "Format: sommet_initial->sommet_2->...->sommet_terminal (longueur du chemin)\n\n"
 
-            if store_traces:
-                with open(execution_traces_filepath, "w") as traces_file:
-                    traces_file.write("Il n'existe pas de circuits absorbants !\n\n")
-                    traces_file.write("Affichage des chemins les plus courts entre chaque paire de sommets : \n")
-                    traces_file.write("Format: sommet_initial->sommet_2->...->sommet_terminal (longueur du chemin)\n\n")
-                    traces_file.write(paths)
+            logs += graph_chosen.get_paths(prev, dist)
+
+        print(logs)
+        if store_traces:
+            with open(execution_traces_filepath, "w") as traces_file:
+                traces_file.write(logs)
 
         print("\nSouhaitez-vous tester un autre graphe ?\n- 1 : Oui\n- 2 : Non")
         isLoopContinuing = input()

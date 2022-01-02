@@ -1,3 +1,105 @@
+Affichage du graphe : 
+
+       0   1   2   3
+    ----------------
+ 0 |   0   1   5 inf
+ 1 | inf   0  -3   5
+ 2 | inf inf   0   2
+ 3 | inf inf inf   0
+
+Application de l'algorithme Floyd-Warshall...
+Itération n°1:
+L :
+       0   1   2   3
+    ----------------
+ 0 |   0   1   5 inf
+ 1 | inf   0  -3   5
+ 2 | inf inf   0   2
+ 3 | inf inf inf   0
+
+ P :
+     0 1 2 3
+    --------
+ 0 | 0 0 0 0
+ 1 | 1 1 1 1
+ 2 | 2 2 2 2
+ 3 | 3 3 3 3
+
+
+Itération n°2:
+L :
+       0   1   2   3
+    ----------------
+ 0 |   0   1   5 inf
+ 1 | inf   0  -3   5
+ 2 | inf inf   0   2
+ 3 | inf inf inf   0
+
+ P :
+     0 1 2 3
+    --------
+ 0 | 0 0 0 0
+ 1 | 1 1 1 1
+ 2 | 2 2 2 2
+ 3 | 3 3 3 3
+
+
+Itération n°3:
+L :
+       0   1   2   3
+    ----------------
+ 0 |   0   1  -2   6
+ 1 | inf   0  -3   5
+ 2 | inf inf   0   2
+ 3 | inf inf inf   0
+
+ P :
+     0 1 2 3
+    --------
+ 0 | 0 0 1 1
+ 1 | 1 1 1 1
+ 2 | 2 2 2 2
+ 3 | 3 3 3 3
+
+
+Itération n°4:
+L :
+       0   1   2   3
+    ----------------
+ 0 |   0   1  -2   0
+ 1 | inf   0  -3  -1
+ 2 | inf inf   0   2
+ 3 | inf inf inf   0
+
+ P :
+     0 1 2 3
+    --------
+ 0 | 0 0 1 2
+ 1 | 1 1 1 2
+ 2 | 2 2 2 2
+ 3 | 3 3 3 3
+
+
+Itération n°5:
+L :
+       0   1   2   3
+    ----------------
+ 0 |   0   1  -2   0
+ 1 | inf   0  -3  -1
+ 2 | inf inf   0   2
+ 3 | inf inf inf   0
+
+ P :
+     0 1 2 3
+    --------
+ 0 | 0 0 1 2
+ 1 | 1 1 1 2
+ 2 | 2 2 2 2
+ 3 | 3 3 3 3
+
+
+
+Recherche de circuits absorbants...
 Il n'existe pas de circuits absorbants !
 
 Affichage des chemins les plus courts entre chaque paire de sommets : 

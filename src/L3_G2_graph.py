@@ -81,14 +81,17 @@ class Graph:
                 dist[i][j] = self.__adj_matrix[i][j]
                 prev[i][j] = i
 
+        floyd_warshall_logs = ""
         # iterations : in this step we set dist and prev by visiting paths passing through node k.
         for k in range(0, self.__nb_nodes):
-            print("Itération n°{}:".format(k + 1))
-            print("L :")
-            self.display_matrix(dist)
-            print("\n P :")
-            self.display_matrix(prev)
-            print("\n")
+            floyd_warshall_logs += "Itération n°{}:".format(k + 1) + "\n" + "L :\n"
+            floyd_warshall_logs += self.display_matrix(dist)
+
+            floyd_warshall_logs += "\n P :\n"
+            floyd_warshall_logs += self.display_matrix(prev)
+
+            floyd_warshall_logs += "\n\n"
+
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
                     if dist[i][k] + dist[k][j] < dist[i][j]:
@@ -97,14 +100,15 @@ class Graph:
                         # we also change the predecessor.
                         prev[i][j] = prev[k][j]
 
-        print("Itération n°{}:".format(self.__nb_nodes + 1))
-        print("L :")
-        self.display_matrix(dist)
-        print("\n P :")
-        self.display_matrix(prev)
-        print("\n")
+        floyd_warshall_logs += "Itération n°{}:".format(self.__nb_nodes + 1) + "\n" + "L :\n"
+        floyd_warshall_logs += self.display_matrix(dist)
+
+        floyd_warshall_logs += "\n P :\n"
+        floyd_warshall_logs += self.display_matrix(prev)
+
+        floyd_warshall_logs += "\n\n"
         dist, prev, have_negative_cycle = self.__detect_negative_cycle(dist, prev)
-        return dist, prev, have_negative_cycle
+        return dist, prev, have_negative_cycle, floyd_warshall_logs
 
     def __detect_negative_cycle(self, dist, prev):
         have_negative_cycle = False
@@ -182,28 +186,29 @@ class Graph:
         max_number_length = max(max_number_length, len(str(self.__nb_nodes)) - 1)
 
         # first we print the list of nodes
-        print("    ", end="")
+        matrix_representation = "    "
         for node_id in range(self.__nb_nodes):
             # we print " " * (max_number_length - len(str(node_id)))
             # in order to align display according to the largest number
-            print(" " * (max_number_length - len(str(node_id))), end="")
-            print(" {}".format(node_id), end="")
-        print()
+            matrix_representation += " " * (max_number_length - len(str(node_id)))
+            matrix_representation += " {}".format(node_id)
+        matrix_representation += "\n"
 
         # then we print the dashes
-        print("    ", end="")
+        matrix_representation += "    "
         for node_id in range(self.__nb_nodes):
-            print("-" * (max_number_length + 1), end="")
-        print()
+            matrix_representation += "-" * (max_number_length + 1)
+        matrix_representation += "\n"
 
         # finally, we print the adj matrix rows
         for starting_node in range(self.__nb_nodes):
             # we print the starting node
-            print(" {} |".format(starting_node), end="")
+            matrix_representation += " {} |".format(starting_node)
             for ending_node in range(self.__nb_nodes):
                 # here we print the weighs of the links between the starting node and the ending node
                 # we print " " * (max_number_length - len(str(self.__adj_matrix[row][column])))
                 # in order to align display according to the largest number
-                print(" " * (max_number_length - len(str(graph_matrix[starting_node][ending_node]))), end="")
-                print(" {}".format(graph_matrix[starting_node][ending_node]), end="")
-            print()
+                matrix_representation += " " * (max_number_length - len(str(graph_matrix[starting_node][ending_node])))
+                matrix_representation += " {}".format(graph_matrix[starting_node][ending_node])
+            matrix_representation += "\n"
+        return matrix_representation
