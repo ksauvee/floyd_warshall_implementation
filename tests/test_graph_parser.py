@@ -1,9 +1,9 @@
-from src.L3_G2_graph_parser import GraphParser
+from src.graph_parser import GraphParser
 
 
 def test_translate_file_to_data_0_node():
     graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = \
-        GraphParser.translate_file_to_data("resources/graphs_examples/G-1.txt")
+        GraphParser.translate_file_to_data("resources/graphs_examples/1.txt")
     assert graph_test_nb_nodes == 0
     assert graph_test_nb_edges == 0
     assert len(graph_test_edges) == 0
@@ -11,7 +11,7 @@ def test_translate_file_to_data_0_node():
 
 def test_translate_file_to_data_1_node():
     graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = \
-        GraphParser.translate_file_to_data("resources/graphs_examples/G-2.txt")
+        GraphParser.translate_file_to_data("resources/graphs_examples/2.txt")
     assert graph_test_nb_nodes == 1
     assert graph_test_nb_edges == 0
     assert len(graph_test_edges) == 0
@@ -19,7 +19,7 @@ def test_translate_file_to_data_1_node():
 
 def test_translate_file_to_data_some_graph():
     graph_test_nb_nodes, graph_test_nb_edges, graph_test_edges = \
-        GraphParser.translate_file_to_data("resources/graphs_examples/G-4.txt")
+        GraphParser.translate_file_to_data("resources/graphs_examples/4.txt")
     assert graph_test_nb_nodes == 4
     assert graph_test_nb_edges == 5
     assert len(graph_test_edges) == 5
