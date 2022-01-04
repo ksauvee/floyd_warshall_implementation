@@ -1,17 +1,17 @@
-from src.L3_G2_graph_selector import GraphSelector
+from src.graph_selector import GraphSelector
 
 
 def test_graph_selector_graph_number_1(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda: "1")
-    assert GraphSelector.graph_selector(store_traces=False) == ("resources/test_graphs/L3_G2_1.txt", "")
+    assert GraphSelector.graph_selector(store_traces=False) == ("resources/test_graphs/1.txt", "")
 
 
 def test_graph_selector_graph_with_any_number(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda: "12")
-    assert GraphSelector.graph_selector(store_traces=False) == ("resources/test_graphs/L3_G2_12.txt", "")
+    assert GraphSelector.graph_selector(store_traces=False) == ("resources/test_graphs/12.txt", "")
 
 
 def test_graph_selector_when_store_traces(monkeypatch):
     monkeypatch.setattr("builtins.input", lambda: "1")
     assert GraphSelector.graph_selector(store_traces=True) == \
-           ("resources/test_graphs/L3_G2_1.txt", "resources/execution_traces/L3_G2_trace_1.txt")
+           ("resources/test_graphs/1.txt", "resources/execution_traces/trace_1.txt")

@@ -1,7 +1,7 @@
 import pytest
 from math import inf
 
-from src.L3_G2_graph import Graph
+from src.graph import Graph
 
 
 def test_negative_number_of_nodes():
