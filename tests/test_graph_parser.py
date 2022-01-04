@@ -1,3 +1,4 @@
+from src.graph import Graph
 from src.graph_parser import GraphParser
 
 
@@ -24,3 +25,8 @@ def test_translate_file_to_data_some_graph():
     assert graph_test_nb_edges == 5
     assert len(graph_test_edges) == 5
     assert graph_test_edges == [[3, 1, 25], [1, 0, 12], [2, 0, -5], [0, 1, 0], [2, 1, 7]]
+
+
+def test_graph_file_parser():
+    graph_test = GraphParser.graph_file_parser("resources/graphs_examples/4.txt")
+    assert type(graph_test) == Graph
