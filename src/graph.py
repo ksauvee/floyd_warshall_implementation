@@ -72,14 +72,9 @@ class Graph:
         if self.__nb_edges <= 0:
             raise ValueError
 
-        dist, prev = [[0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)], [
-            [0 for _ in range(self.__nb_nodes)] for _ in range(self.__nb_nodes)]
-
         # initialization : in this step we set dist and prev by visiting direct paths given by adjacency matrix.
-        for i in range(self.__nb_nodes):
-            for j in range(self.__nb_nodes):
-                dist[i][j] = self.__adj_matrix[i][j]
-                prev[i][j] = i
+        dist, prev = [[self.__adj_matrix[i][j] for j in range(self.__nb_nodes)] for i in range(self.__nb_nodes)], [
+            [i for _ in range(self.__nb_nodes)] for i in range(self.__nb_nodes)]
 
         floyd_warshall_logs = ""
         # iterations : in this step we set dist and prev by visiting paths passing through node k.
