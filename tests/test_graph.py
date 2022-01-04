@@ -21,6 +21,8 @@ def test_edges_list_length_should_equals_nb_edges():
 
 def test_graph_without_node():
     graph_test = Graph(0, 0, [])
+    assert graph_test.get_nb_nodes() == 0
+    assert graph_test.get_nb_edges() == 0
     assert len(graph_test.get_adj_matrix()) == 0
 
     for node_neighbors in graph_test.get_adj_matrix():
@@ -29,6 +31,8 @@ def test_graph_without_node():
 
 def test_graph_with_one_node():
     graph_test = Graph(1, 0, [])
+    assert graph_test.get_nb_nodes() == 1
+    assert graph_test.get_nb_edges() == 0
     assert len(graph_test.get_adj_matrix()) == 1
 
     for node_neighbors in graph_test.get_adj_matrix():
@@ -37,6 +41,8 @@ def test_graph_with_one_node():
 
 def test_graph_with_54_nodes():
     graph_test = Graph(54, 0, [])
+    assert graph_test.get_nb_nodes() == 54
+    assert graph_test.get_nb_edges() == 0
     assert len(graph_test.get_adj_matrix()) == 54
 
     for node_neighbors in graph_test.get_adj_matrix():
@@ -50,6 +56,8 @@ def test_edge_with_invalid_values():
 
 def test_adj_matrix_correctly_filled():
     graph_test = Graph(3, 2, [[0, 2, 3], [0, 1, 1]])
+    assert graph_test.get_nb_nodes() == 3
+    assert graph_test.get_nb_edges() == 2
     graph_test_adj_matrix = graph_test.get_adj_matrix()
 
     for i in range(3):
