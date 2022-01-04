@@ -77,16 +77,16 @@ class Graph:
             [i for _ in range(self.__nb_nodes)] for i in range(self.__nb_nodes)]
 
         floyd_warshall_logs = ""
+        floyd_warshall_logs += "Initialisation:\n" + "L :\n"
+        floyd_warshall_logs += self.display_matrix(dist)
+
+        floyd_warshall_logs += "\n P :\n"
+        floyd_warshall_logs += self.display_matrix(prev)
+
+        floyd_warshall_logs += "\n\n"
+
         # iterations : in this step we set dist and prev by visiting paths passing through node k.
         for k in range(0, self.__nb_nodes):
-            floyd_warshall_logs += "Itération n°{}:".format(k + 1) + "\n" + "L :\n"
-            floyd_warshall_logs += self.display_matrix(dist)
-
-            floyd_warshall_logs += "\n P :\n"
-            floyd_warshall_logs += self.display_matrix(prev)
-
-            floyd_warshall_logs += "\n\n"
-
             for i in range(0, self.__nb_nodes):
                 for j in range(0, self.__nb_nodes):
                     if dist[i][k] + dist[k][j] < dist[i][j]:
@@ -95,13 +95,14 @@ class Graph:
                         # we also change the predecessor.
                         prev[i][j] = prev[k][j]
 
-        floyd_warshall_logs += "Itération n°{}:".format(self.__nb_nodes + 1) + "\n" + "L :\n"
-        floyd_warshall_logs += self.display_matrix(dist)
+            floyd_warshall_logs += "Itération n°{}:".format(k + 1) + "\n" + "L :\n"
+            floyd_warshall_logs += self.display_matrix(dist)
 
-        floyd_warshall_logs += "\n P :\n"
-        floyd_warshall_logs += self.display_matrix(prev)
+            floyd_warshall_logs += "\n P :\n"
+            floyd_warshall_logs += self.display_matrix(prev)
 
-        floyd_warshall_logs += "\n\n"
+            floyd_warshall_logs += "\n\n"
+
         dist, prev, have_negative_cycle = self.__detect_negative_cycle(dist, prev)
         return dist, prev, have_negative_cycle, floyd_warshall_logs
 
