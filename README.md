@@ -14,9 +14,6 @@ floyd_warshall_implementation is as its name indicates an implementation of the 
 ### Done
 
 - Add reading a graph from a file
-
-### Not Done
-
 - Add graph printing
 - Implement Floyd-Warshall algorithm
 - Add detection of absorbing circuit
